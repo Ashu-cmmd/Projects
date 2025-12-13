@@ -2,6 +2,7 @@ import { useState } from "react"
 import axios from "axios"
 import SearchBar from "./components/SearchBar"
 import WeatherCard from "./components/WeatherCard"
+import Video from './Video.mp4'
 
 function App() {
   const [weather, setWeather] = useState(null)
@@ -37,8 +38,12 @@ function App() {
 
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-blue-100">
-      <div className="bg-black/90 text-white rounded-lg shadow-lg p-8  max-w-md w-full">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-blue-100 relative overflow-hidden">
+      <video className="absolute top-0 left-0 w-full h-full object-cover"
+       autoPlay loop muted >
+        <source src={Video} type="video/mp4" />
+      </video>
+      <div className="bg-black/90 text-white rounded-lg shadow-lg p-8  max-w-md w-full z-10">
 
         <h1 className="text-3xl font-bold text-center mb-6"> Weather App</h1>
         <SearchBar fetchWeather={fetchWeather} />
@@ -50,5 +55,4 @@ function App() {
     </div>
   )
 }
-
 export default App
