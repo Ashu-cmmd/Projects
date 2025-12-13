@@ -1,31 +1,29 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
-function SearchBar({ onSearch }) {
-  const [city, setCity] = useState("");
+const SearchBar = ( {fetchWeather}) => {
+    const [city, setCity] = useState("")
+    const handelSubmit = (e) =>{
+        e.preventDefault();
+        if(city.trim()){
+            fetchWeather(city)
+            setCity("")
+        }
+    }
 
-  const handleSearch = () => onSearch(city);
-  const handleEnterKey = (e) => {
-    if (e.key === "Enter") handleSearch();
-  };
+    return (
+        <form className='flex'  onSubmit={handelSubmit}>
+            <input type="text"
+            placeholder='Enter city name' 
+            value={city} 
+            onChange={(e) => setCity(e.target.value)} 
+            className=" flex-1 p-2 border border-gray-300 rounded-l-lg outline-none border-r-0 "/>
 
-  return (
-    <div className="flex gap-2">
-      <input
-        type="text"
-        placeholder="Enter city name"
-        className="flex-1 p-2 border rounded-lg"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-        onKeyDown={handleEnterKey}
-      />
-      <button
-        onClick={handleSearch}
-        className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-      >
-        Search
-      </button>
-    </div>
-  );
+            <button type='submit'
+             className='bg-blue-500 border cursor-pointer p-2 hover:bg-blue-600 border-l-0 rounded-r-lg'>
+                  Search </button>
+        </form>
+
+    )
 }
 
-export default SearchBar;
+export default SearchBar
